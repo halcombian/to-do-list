@@ -9,7 +9,7 @@ body {
 	height: 100%;
 	width: 100%;
 	margin: 0;
-	padding: 2vw;
+	padding: 2vw 0 2vw 0;
 	box-sizing: border-box;
 }
 
@@ -21,20 +21,19 @@ body {
 	height: 100%;
 	width: 100%;
 	max-width: 700px;
-	padding: 2.5%;
 	box-sizing: border-box;
 	.top-bar {
 		background-color: lightgray;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		grid-template-rows: 1fr 1fr;
+		grid-template-rows: 1fr 1fr 1fr;
 		height: 15%;
 		h1 {
+			font-size: 3vh;
+			font-weight: 400;
+			text-align: center;
 			grid-column: 1 / -1;
 			margin: 0;
-			font-weight: 400;
-			align-self: center;
-			text-align: center;
 		}
 		button {
 			font-size: 2vh;
@@ -46,4 +45,42 @@ body {
 		padding: 5%;
 		box-sizing: border-box;
 	}
+}
+
+.window-new {
+	grid-column: 1 / -1;
+	display: flex;
+	align-items: center;
+	padding: 0 10% 0 10%;
+	box-sizing: border-box;
+	/*form {
+		display: flex;
+		width: 100%;*/
+	.btn-input {
+		border: 0.5px solid black;
+		border-radius: 2px;
+		box-sizing: border-box;
+	}
+	.btn-submit {
+		//background-image: url(images/done_black_24dp.svg);
+		//background-position: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 29px;
+	}
+	input {
+		font-size: 2vh;
+		width: 100%;
+		//box-sizing: border-box;
+	}
+	.btn-close {
+		//background-image: url(images/close_black_24dp.svg);
+		//background-position: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 29px;
+	}
+	//}
 }
