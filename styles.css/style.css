@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 html,
 body {
@@ -56,7 +57,7 @@ body {
 }
 
 .con-main .top-bar button {
-  font-size: 2vh;
+  font-size: 2.5vh;
 }
 
 .con-main .con-to-do {
@@ -78,9 +79,6 @@ body {
   padding: 0 10% 0 10%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  /*form {
-		display: flex;
-		width: 100%;*/
 }
 
 .window-new .btn-input {
@@ -119,5 +117,13 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   width: 29px;
+}
+
+.con-to-do {
+  font-size: 2.5vh;
+}
+
+.con-to-do .item-to-do::before {
+  content: "• ";
 }
 /*# sourceMappingURL=style.css.map */

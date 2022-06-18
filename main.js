@@ -3,14 +3,13 @@ const topBar = document.querySelector(".top-bar");
 const btnNew = document.querySelector(".btn-new");
 const btnDelete = document.querySelector(".btn-delete");
 
-//Variables for input form window
-const windowNew = document.createElement("div"); //Container for input form
-const formNew = document.createElement("form");
+//Variables for input window
+const windowNew = document.createElement("div"); //Container for input window
 const inputNew = document.createElement("input");
 const btnSubmit = document.createElement("button"); //Submit button
-const imgSubmit = document.createElement("img"); //Submit img
+const imgSubmit = document.createElement("img"); //Submit button img
 const btnClose = document.createElement("button"); //Close button
-const imgClose = document.createElement("img"); //Close img
+const imgClose = document.createElement("img"); //Close button img
 
 //Click event listener for the New button
 //On click it creates an input window to add to-do's to the list
@@ -18,7 +17,6 @@ const imgClose = document.createElement("img"); //Close img
 btnNew.addEventListener("click", () => {
 	//Class names
 	windowNew.className = "window-new";
-	//formNew.className = "form-new";
 	inputNew.className = "input-new";
 	btnSubmit.className = "btn-input btn-submit";
 	btnClose.className = "btn-input btn-close";
@@ -33,13 +31,14 @@ btnNew.addEventListener("click", () => {
 	imgClose.setAttribute("src", "styles.css/images/close_black_24dp.svg"); //Close button
 	imgClose.setAttribute("alt", "close button");
 
-	topBar.appendChild(windowNew); //Appends input form window bellow top bar
-	//windowNew.appendChild(formNew);
+	topBar.appendChild(windowNew); //Appends input window bellow top bar
 	windowNew.appendChild(btnSubmit); //Places submit button on the left of text input
 	btnSubmit.appendChild(imgSubmit);
 	windowNew.appendChild(inputNew); //Places text input between submit and close buttons
 	windowNew.appendChild(btnClose); //Places close button on the right of text input
 	btnClose.appendChild(imgClose);
+
+	inputNew.select(); //Selects text input
 
 	btnNew.disabled = true; //Disables new button when input window is opened
 });
@@ -51,19 +50,36 @@ function closeWindow() {
 	btnNew.disabled = false; //Enables new button when input window is closed
 }
 
-//Adds functionality to close button
-//Closes the window when clicked
-btnClose.addEventListener("click", closeWindow);
-
 //Variable for to do list container
 const conToDo = document.querySelector(".con-to-do");
 
 //Adds functionality to submit button
 //Creates an element containing text input's value and appends it to the to do list container
 btnSubmit.addEventListener("click", () => {
-	const itemToDo = document.createElement("div");
-	itemToDo.className = "item-to-do";
-	itemToDo.textContent = inputNew.value;
-	conToDo.appendChild(itemToDo);
-	closeWindow();
+	if (inputNew.value === "") {
+		return; //Prevents function from creating empty items
+	} else {
+		const itemToDo = document.createElement("div"); //Creates an individual to do item
+		itemToDo.className = "item-to-do";
+		itemToDo.textContent = inputNew.value; //Gives it text from text input
+		conToDo.appendChild(itemToDo);
+		closeWindow(); //Closes the new input window
+	}
+});
+
+//Clicks the submit butten when Enter key is pressed
+inputNew.addEventListener("keypress", function (e) {
+	if (e.key === "Enter") {
+		btnSubmit.click();
+	}
+});
+
+//Adds functionality to close button
+//Closes the window when clicked
+btnClose.addEventListener("click", closeWindow);
+
+inputNew.addEventListener("keydown", (e) => {
+	if (e.key === "Escape") {
+		btnClose.click();
+	}
 });
