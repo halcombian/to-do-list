@@ -50,24 +50,49 @@ function closeWindow() {
 	btnNew.disabled = false; //Enables new button when input window is closed
 }
 
-//Variable for to do list container
-const conToDo = document.querySelector(".con-to-do");
+const conToDo = document.querySelector(".con-to-do"); //Variable for to do container
+
+let itemInt = 0; //Integer which is incremented in newItem() to give each item a unique name and type
+
+//Creates a new to do item
+//Gets itemInt and increments to give each item a unique name and type
+//Creates a checkbox that proceeds a label
+//Label has text content set to text input's value
+function newItem() {
+	const checkBox = document.createElement("input");
+	const itemLabel = document.createElement("label");
+	const itemCon = document.createElement("div");
+
+	itemInt++; //Item integer
+
+	checkBox.type = "checkbox"; //Creates the checkbox
+	checkBox.name = itemInt;
+	checkBox.className = "checkbox";
+
+	itemLabel.setAttribute("for", itemInt); //Creates the label
+	itemLabel.className = "item-to-do";
+	itemLabel.textContent = inputNew.value;
+
+	itemCon.className = "item-con"; //Creates the container for better styling
+
+	//Appends to the to do container
+	conToDo.appendChild(itemCon);
+	itemCon.appendChild(checkBox);
+	itemCon.appendChild(itemLabel);
+}
 
 //Adds functionality to submit button
-//Creates an element containing text input's value and appends it to the to do list container
+//Creates a checkbox and label which contains the text input's value and appends it to the to do container
 btnSubmit.addEventListener("click", () => {
 	if (inputNew.value === "") {
 		return; //Prevents function from creating empty items
 	} else {
-		const itemToDo = document.createElement("div"); //Creates an individual to do item
-		itemToDo.className = "item-to-do";
-		itemToDo.textContent = inputNew.value; //Gives it text from text input
-		conToDo.appendChild(itemToDo);
+		newItem(); //Creates new to do item
 		closeWindow(); //Closes the new input window
 	}
 });
 
-//Clicks the submit butten when Enter key is pressed
+//Clicks the submit button when Enter key is pressed
 inputNew.addEventListener("keypress", function (e) {
 	if (e.key === "Enter") {
 		btnSubmit.click();
@@ -78,6 +103,7 @@ inputNew.addEventListener("keypress", function (e) {
 //Closes the window when clicked
 btnClose.addEventListener("click", closeWindow);
 
+//Clicks the close button when Escape key is pressed down
 inputNew.addEventListener("keydown", (e) => {
 	if (e.key === "Escape") {
 		btnClose.click();
