@@ -50,6 +50,8 @@ function closeWindow() {
 	btnNew.disabled = false; //Enables new button when input window is closed
 }
 
+let toDos = []; //Array to store to do list
+
 const conToDo = document.querySelector(".con-to-do"); //Variable for to do container
 
 let itemInt = 0; //Integer which is incremented in newItem() to give each item a unique name and type
@@ -73,12 +75,14 @@ function newItem() {
 	itemLabel.className = "item-to-do";
 	itemLabel.textContent = inputNew.value;
 
-	itemCon.className = "item-con"; //Creates the container for better styling
+	itemCon.className = "item-con"; //Creates the item container
 
 	//Appends to the to do container
 	conToDo.appendChild(itemCon);
 	itemCon.appendChild(checkBox);
 	itemCon.appendChild(itemLabel);
+
+	toDos.push(itemInt);
 }
 
 //Adds functionality to submit button
@@ -107,5 +111,18 @@ btnClose.addEventListener("click", closeWindow);
 inputNew.addEventListener("keydown", (e) => {
 	if (e.key === "Escape") {
 		btnClose.click();
+	}
+});
+
+//-------------------------------------------------------------------
+
+btnDelete.addEventListener("click", () => {
+	const itemCon = document.getElementsByClassName("item-con");
+	const checkbox = document.getElementsByClassName("checkbox");
+	for (let i = 0; i < itemCon.length; i++) {
+		if (checkbox[i].checked) {
+			conToDo.removeChild(itemCon[i]);
+			i--;
+		}
 	}
 });
